@@ -38,7 +38,6 @@ data = {
         "temperature": 0.7,
         "maxOutputTokens": 4096,
         "topP": 1,
-        "topK": 40
     }
 }
 fetch(base_url, {

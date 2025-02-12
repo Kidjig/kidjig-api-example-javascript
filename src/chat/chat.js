@@ -1,9 +1,13 @@
-const url = "https://api.kidjig.com/provider/api/v1/openai/chat/gpt-4o";
+
+// base_url =  "https://api.kidjig.com/provider/api/v1/{provider}/chat/completions"
+
+const url = "https://api.kidjig.com/provider/api/v1/{provider}/chat/completions"; // Replace provider with your provider you want to use
 const headers = {
     "X-Api-Key": "your_api_key", // Replace with your KidJig API key
     "Content-Type": "application/json",
 };
 const data = {
+    "model": "modelId",  // modelId or modelName 
     prompt: "What is the capital of France?",
     stream: false,
     config: {
@@ -23,19 +27,7 @@ async function makeRequest() {
         });
 
         const responseData = await response.json();
-
-        // Extract specific information from the response
-        const success = responseData.success;
-        const message = responseData.message;
-        const aiResponse = responseData.data.response;
-        const usage = responseData.data.usage;
-        const cost = responseData.data.cost;
-
-        console.log(`Success: ${success}`);
-        console.log(`Message: ${message}`);
-        console.log(`AI Response: ${aiResponse}`);
-        console.log(`Token Usage: ${usage}`);
-        console.log(`Cost: ${cost}`);
+        console.log("Response Data", responseData);
 
     } catch (error) {
         console.error(`An error occurred: ${error.message}`);

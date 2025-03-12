@@ -5,6 +5,7 @@ This repository provides comprehensive JavaScript code examples and implementati
 Key Features:
 - Chat Completion API integration examples
 - Image Generation API implementation samples
+- Agent API management and interaction
 
 ## Prerequisites
 
@@ -13,6 +14,24 @@ Before getting started, ensure you have the following:
 - Node.js 12.0 or higher installed on your system
 - A valid KidJig API key (obtain one from the [KidJig Playground](https://platform.kidjig.com/api-keys))
 - Familiarity with the available models (see [KidJig Models Documentation](https://kidjig.gitbook.io/kidjig-docs/api-overview/text-models-llm/models))
+
+## Authentication
+Before using any API endpoint, you need to:
+1. Obtain your API key from [KidJig Playground](https://platform.kidjig.com/api-keys)
+2. Include it in all requests using the `X-Api-Key` header
+3. Never expose your API key in client-side code
+
+## Setup
+1. Clone this repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file:
+   ```
+   KIDJIG_API_KEY=your_api_key
+   ```
+4. Update the provider in API URLs with your chosen provider
 
 ## Usage
 
@@ -125,8 +144,67 @@ Before running the examples:
 ### Image Response
 The image endpoints return status updates and final image URLs when processing is complete.
 
+### Agent API Integration
+
+The KidJig Agent API allows you to create and manage AI agents for various tasks. The example demonstrates complete CRUD operations and chat functionality with agents.
+
+To use the Agent API examples:
+
+Run the script:
+```bash
+node src/agents/agent.js
+```
+
+Available Agent Operations:
+
+- Create a new agent with custom configurations
+- Retrieve all agents
+- Get specific agent details by ID
+- Update existing agent properties
+- Delete an agent
+- Chat with an agent
+
+## Base URL for Agent API
+```bash
+base_url = "https://api.kidjig.com/agents/api/v1"
+```
+
+## Agent API Endpoints
+- Create: POST /api/v1/
+- Get All: GET /api/v1/
+- Get by ID: GET /api/v1/{agentId}
+- Get Tools: GET /api/v1/tools
+- Update: PUT /api/v1/{agentId}
+- Delete: DELETE /api/v1/{agentId}
+- Chat: POST /api/v1/chat/{agentId}
+- Chat History by ID: GET /api/v1/chat-history/{agentId}
+- Clone Agents By ID: POST /api/v1/clone/{agentId}
+- Logs: GET /api/v1/logs
+- Logs by ID: GET /api/v1/logs/{agentId}
+
 ## Error Handling
 All examples include basic error handling for common issues like network errors or invalid responses.
+
+## Error Handling Examples
+Common API errors and how to handle them:
+
+```json
+{
+    "error": {
+        "code": "invalid_api_key",
+        "message": "Invalid API key provided"
+    }
+}
+```
+
+```json
+{
+    "error": {
+        "code": "rate_limit_exceeded",
+        "message": "Rate limit exceeded, please try again later"
+    }
+}
+```
 
 ## Support
 For additional support or questions, please refer to the [KidJig API documentation](https://kidjig.gitbook.io/kidjig-docs/getting-started/quickstart).

@@ -2,9 +2,7 @@
 // This file demonstrates how to interact with the KidJig API for managing agents and chat.
 
 // Base URL and headers
-const base_url = "https://api.kidjig.com/agents/api/v1/";
-// const url = "http://127.0.0.1:8000/api/v1";
-// const url = "http://apivultra.kidjig.com/agents/api/v1/";
+const base_url = "https://api.kidjig.com/agents/api/v1";
 const headers = {
 	"X-Api-Key": "your_api_key", // Replace with your KidJig API key
 	"Content-Type": "application/json",
@@ -13,7 +11,7 @@ const headers = {
 // Create a new agent
 async function createAgent() {
 	try {
-		const response = await fetch(`${base_url}`, {
+		const response = await fetch(`${base_url}/`, {
 			method: "POST",
 			headers: headers,
 			body: JSON.stringify({
@@ -37,7 +35,7 @@ async function createAgent() {
 // Get all agents
 async function getAgents() {
 	try {
-		const response = await fetch(`${base_url}`, {
+		const response = await fetch(`${base_url}/`, {
 			method: "GET",
 			headers: headers,
 		});
@@ -184,7 +182,7 @@ async function getLogsById(agentId) {
 // Uncomment the following lines to test the functions:
 
 // createAgent();
-// getAgents();
+getAgents();
 // getAgentById("67cbbd7d80ba7f4b5da9c754");
 // updateAgent("67cbc00e80ba7f4b5da9c75f", { tools: ["Search"] });
 // deleteAgent("67cbbd7d80ba7f4b5da9c754");

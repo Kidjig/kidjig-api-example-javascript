@@ -110,6 +110,76 @@ node src/images/2_image_status.js
 node src/images/3_image_result.js
  ```
 
+### OCR (Optical Character Recognition)
+The OCR example demonstrates how to extract text from documents and images using KidJig's OCR API powered by Mistral AI.
+
+#### OCR Features
+- Extract text from PDF documents and images
+- Preserve document structure and formatting
+- Support for document URLs, image URLs, and direct file uploads
+- Returns results in markdown format
+
+#### OCR Integration
+
+KidJig offers three flexible methods for OCR processing:
+
+1. Process a document URL:
+```javascript
+const url = "https://api.kidjig.com/provider/api/v1/mistralai/ocr/process";
+
+const headers = {
+  "X-Api-Key": "your_api_key", // Replace with your KidJig API key
+  "Content-Type": "application/json"
+};
+
+const data = {
+  model: "mistral-ocr-latest",
+  documentUrl: "https://example.com/document.pdf" // Replace with your document URL
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(data => console.log(data));
+```
+
+2. Process an image URL:
+```javascript
+const data = {
+  model: "mistral-ocr-latest",
+  imageUrl: "https://example.com/image.jpg" // Replace with your image URL
+};
+
+// Use the same fetch call as above with this data
+```
+
+3. Upload and process a file:
+```javascript
+const formData = new FormData();
+formData.append("model", "mistral-ocr-latest");
+formData.append("file", fileObject); // File from input or fs.readFileSync
+
+const headers = {
+  "X-Api-Key": "your_api_key" // Replace with your KidJig API key
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: formData
+})
+.then(response => response.json())
+.then(data => console.log(data));
+```
+
+To run the OCR example:
+```bash
+node src/ocr/ocr.js
+```
+
 ## Configuration
 Before running the examples:
 
@@ -136,7 +206,7 @@ Before running the examples:
             "completionTokens": 9,
             "totalTokens": 23
         },
-        "cost": 96000000
+        "cost": 0.0001
     }
 }
  ```

@@ -5,6 +5,7 @@ This repository provides comprehensive JavaScript code examples and implementati
 Key Features:
 - Chat Completion API integration examples
 - Image Generation API implementation samples
+- Text-to-Speech API integration examples
 - Agent API management and interaction
 
 ## Prerequisites
@@ -180,6 +181,78 @@ To run the OCR example:
 node src/ocr/ocr.js
 ```
 
+### Text-to-Speech API Integration
+
+The KidJig Text-to-Speech API allows you to convert text into natural-sounding speech. This section demonstrates how to integrate and utilize these features in your applications.
+
+#### Text-to-Speech Features
+- Convert text to high-quality speech audio
+- Multiple provider options (elevenlabs, whisper, sarvam)
+- Various voice options
+- Configurable output formats (mp3, wav, ogg)
+
+#### Text-to-Speech Integration
+
+KidJig offers two main Text-to-Speech operations:
+
+1. Generate speech from text:
+```javascript
+const provider = "elevenlabs"; // Options: elevenlabs, whisper, sarvam
+const voice = "aria"; // Voice ID from your system (e.g., aria, roger, sarah)
+const url = `https://api.kidjig.com/provider/api/v1/tts/${provider}/${voice}`;
+
+const headers = {
+  "X-Api-Key": "your_api_key", // Replace with your KidJig API key
+  "Content-Type": "application/json",
+};
+
+const data = {
+  text: "Hello, this is a test of the text to speech API.",
+  config: {
+    format: "mp3", // Optional: Audio format (mp3, wav, ogg)
+  },
+};
+
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(data => {
+  if (data.success) {
+    console.log("Audio URL:", data.data.audioUrl);
+  }
+});
+```
+
+2. Get available TTS models:
+```javascript
+const provider = "elevenlabs"; // Options: elevenlabs, whisper, sarvam
+const url = `https://api.kidjig.com/provider/api/v1/tts/${provider}/models`;
+
+const headers = {
+  "X-Api-Key": "your_api_key", // Replace with your KidJig API key
+};
+
+fetch(url, {
+  method: "GET",
+  headers: headers
+})
+.then(response => response.json())
+.then(data => {
+  if (data.success) {
+    console.log("Available models:", data.data.models);
+  }
+});
+```
+
+To run the Text-to-Speech examples:
+```bash
+node src/audio/text-to-speech/generateSpeech.js
+node src/audio/text-to-speech/getModels.js
+```
+
 ## Configuration
 Before running the examples:
 
@@ -189,10 +262,15 @@ Before running the examples:
 ## API Endpoints
 ### Chat
 - Chat completion: POST /api/v1/{provider}/chat/{model}
+
 ### Image
 - Generate: POST /api/v1/image/generate/{modelid}
 - Status: GET /api/v1/image/status/{modelid}/{request_id}
 - Result: GET /api/v1/image/result/{modelid}/{request_id}
+
+### Text-to-Speech
+- Generate Speech: POST /api/v1/tts/{provider}/{voice}
+- Get Available Models: GET /api/v1/tts/{provider}/models
 ## Response Examples
 ### Chat Response
 ```json

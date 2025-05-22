@@ -198,8 +198,7 @@ KidJig offers two main Text-to-Speech operations:
 1. Generate speech from text:
 ```javascript
 const provider = "elevenlabs"; // Options: elevenlabs, whisper, sarvam
-const voice = "aria"; // Voice ID from your system (e.g., aria, roger, sarah)
-const url = `https://api.kidjig.com/provider/api/v1/tts/${provider}/${voice}`;
+const url = `https://api.kidjig.com/provider/api/v1/tts/${provider}/generate`;
 
 const headers = {
   "X-Api-Key": "your_api_key", // Replace with your KidJig API key
@@ -207,10 +206,12 @@ const headers = {
 };
 
 const data = {
-  text: "Hello, this is a test of the text to speech API.",
-  config: {
-    format: "mp3", // Optional: Audio format (mp3, wav, ogg)
-  },
+	model: "eleven_multilingual_v2", // Options: eleven_turbo_v2, eleven_multilingual_v2, tts-1,bulbul:v1,bulbul:v2
+	voice: "aria", // Voice ID from your system (e.g., aria, roger, sarah)
+	text: "Hello, this is a test of the text to speech API.",
+	config: {
+		format: "mp3", // Optional: Audio format (mp3, wav, ogg)
+	},
 };
 
 fetch(url, {
@@ -269,7 +270,7 @@ Before running the examples:
 - Result: GET /api/v1/image/result/{modelid}/{request_id}
 
 ### Text-to-Speech
-- Generate Speech: POST /api/v1/tts/{provider}/{voice}
+- Generate Speech: POST /api/v1/tts/{provider}/generate
 - Get Available Models: GET /api/v1/tts/{provider}/models
 ## Response Examples
 ### Chat Response

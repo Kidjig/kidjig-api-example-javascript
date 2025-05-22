@@ -2,7 +2,7 @@
 
 const provider = "elevenlabs"; // Options: elevenlabs, whisper, sarvam
 const voice = "aria"; // Voice ID from your system (e.g., aria, roger, sarah)
-const url = `https://api.kidjig.com/provider/api/v1/tts/${provider}/${voice}`;
+const url = `https://api.kidjig.com/provider/api/v1/tts/${provider}/generate`;
 
 const headers = {
 	"X-Api-Key": "your_api_key", // Replace with your KidJig API key
@@ -10,6 +10,8 @@ const headers = {
 };
 
 const data = {
+	model: "eleven_multilingual_v2", // Options: eleven_turbo_v2, eleven_multilingual_v2, tts-1,bulbul:v1,bulbul:v2
+	voice: "aria", // Voice ID from your system (e.g., aria, roger, sarah)
 	text: "Hello, this is a test of the text to speech API.",
 	config: {
 		format: "mp3", // Optional: Audio format (mp3, wav, ogg)

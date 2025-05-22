@@ -1,7 +1,6 @@
 // Generate Speech Example
 
 const provider = "elevenlabs"; // Options: elevenlabs, whisper, sarvam
-const voice = "aria"; // Voice ID from your system (e.g., aria, roger, sarah)
 const url = `https://api.kidjig.com/provider/api/v1/tts/${provider}/generate`;
 
 const headers = {
